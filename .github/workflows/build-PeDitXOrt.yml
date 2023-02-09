@@ -64,7 +64,7 @@ jobs:
         git branch -a
         git tag
         git checkout $REPO_TAG
-        cd
+        cd /workdir
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
     - name: Load custom feeds
