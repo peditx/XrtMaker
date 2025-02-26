@@ -10,6 +10,9 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 #
 
+# Ensure we are on the correct branch (main)
+git checkout main
+
 # Clone the necessary repositories
 git clone https://github.com/peditx/luci-theme-peditx package/luci-theme-peditx
 git clone https://github.com/peditx/luci-app-themeswitch package/luci-app-themeswitch
