@@ -10,17 +10,31 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-#Modify default IP
-#sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+# Change default IP to 10.1.1.1
+sed -i 's/192.168.1.1/10.1.1.1/g' package/base-files/files/bin/config_generate
 
-#Rename design
-#sed -i '  _____     _____  _ _  __   __     _   
-# |  __ \   |  __ \(_) | \ \ / /    | |  
-# | |__) |__| |  | |_| |_ \ V / _ __| |_ 
-# |  ___/ _ \ |  | | | __| > < | '__| __|
-# | |  |  __/ |__| | | |_ / . \| |  | |_ 
-# |_|   \___|_____/|_|\__/_/
-#                P  E  D  I  T  X  R  T
-#-----------------------------------------------------
-# %D %V, %C
-# -----------------------------------------------------' package/base-files/files/etc/banner
+# Change banner
+echo "   
+ ______      _____   _      _    _     _____       
+(_____ \    (____ \ (_)_   \ \  / /   / ___ \      
+ _____) )___ _   \ \ _| |_  \ \/ /   | |   | | ___ 
+|  ____/ _  ) |   | | |  _)  )  (    | |   | |/___)
+| |   ( (/ /| |__/ /| | |__ / /\ \   | |___| |___ |
+|_|    \____)_____/ |_|\___)_/  \_\   \_____/(___/ 
+                                                   
+                                  P A S S W A L L                                                                                         
+telegram : @PeDitX" > package/base-files/files/etc/banner
+
+# Set timezone and time
+sed -i 's/^.*zonename=.*$/uci set system.@system[0].zonename="Asia\/Tehran"/' package/base-files/files/etc/config/system
+sed -i 's/^.*timezone=.*$/uci set system.@system[0].timezone="<+0330>-3:30"/' package/base-files/files/etc/config/system
+
+# Change hostname
+sed -i 's/^.*hostname=.*$/uci set system.@system[0].hostname="PeDitXOS"/' package/base-files/files/etc/config/system
+
+# Update openwrt_release
+sed -i 's/DISTRIB_ID=.*/DISTRIB_ID="PeDitXOS"/' package/base-files/files/etc/openwrt_release
+sed -i 's/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION="PeDitX OS telegram:@peditx"/' package/base-files/files/etc/openwrt_release
+
+# Reload configuration
+sed -i 's/^.*reload_config.*$/\/sbin\/reload_config/' package/base-files/files/etc/rc.local
